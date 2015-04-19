@@ -11,5 +11,5 @@ define(["require", "exports", "./lib/stream"], (function(require, exports, strea
             return (x / y);
         }),
         s = stream.from([2, 3, 4]);
-    console.log(foldl(__div, 120, reverse(cons(1)(s))));
+    console.log(foldl(__div, 120, cons(1, reverse(s))));
 }));

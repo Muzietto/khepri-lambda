@@ -18,7 +18,7 @@ var constant := \x -> \ -> x;
 stream := \val f -> ({'first': val, 'rest': f});
 
 // Function application without parens in `constant`
-cons := \val -> \s -> stream(val, constant s);
+cons := \val s -> stream(val, constant s);
 
 // Khepri's prefix and infix user defined operators can be used
 // almost anywhere an identifier symbol can. They are lexically

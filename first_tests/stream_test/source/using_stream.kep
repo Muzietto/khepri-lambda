@@ -10,8 +10,8 @@ in {
     var s = stream.from [2, 3, 4];
 
     // pipelining
-    cons 1 s // using our custom cons operator
-        |> reverse
+    cons (1, s 
+        |> reverse)
         |> foldl@((/), 120) // create function from operator
         |> console.log; // prints 5
 }

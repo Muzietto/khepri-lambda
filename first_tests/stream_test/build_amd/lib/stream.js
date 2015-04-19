@@ -11,15 +11,13 @@ define(["require", "exports"], (function(require, exports) {
             "rest": f
         });
     }));
-    (cons = (function(val) {
-        return (function(s) {
-            var f = (function() {
-                return s;
-            });
-            return ({
-                "first": val,
-                "rest": f
-            });
+    (cons = (function(val, s) {
+        var f = (function() {
+            return s;
+        });
+        return ({
+            "first": val,
+            "rest": f
         });
     }));
     (__plus_lt = cons);
@@ -45,14 +43,12 @@ define(["require", "exports"], (function(require, exports) {
         return r;
     }));
     (reverse = foldl.bind(null, (function(x, y) {
-        return (function(s) {
-            var f = (function() {
-                return s;
-            });
-            return ({
-                "first": y,
-                "rest": f
-            });
+        var f = (function() {
+            return x;
+        });
+        return ({
+            "first": y,
+            "rest": f
         });
     }), null));
     (toArray = foldl.bind(null, [].concat.bind([]), []));

@@ -1,0 +1,17 @@
+package () with
+
+    // gotta prepend ./ to satisfy relative paths in require.js
+    import './lib/math' math#{min, max}
+    
+in {
+  static console;
+  
+  var s = min 1 2;
+  
+  console.log ('min 1 2 is ' + s);
+
+  var s2 = max 1 2;
+  
+  console.log ('max 1 2 is ' + s2);
+  
+}

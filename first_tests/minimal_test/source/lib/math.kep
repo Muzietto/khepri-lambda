@@ -1,0 +1,5 @@
+package (min max)
+{
+    min := \x -> \y -> ?x < y : x : y;
+    max := \x -> \ y -> ?x < y : y : x;
+}

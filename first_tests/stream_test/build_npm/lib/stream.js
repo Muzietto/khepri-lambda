@@ -1,5 +1,5 @@
 /*
- * THIS FILE IS AUTO GENERATED FROM 'streams.kep'
+ * THIS FILE IS AUTO GENERATED FROM 'source\lib\stream.kep'
  * DO NOT EDIT
 */
 "use strict";

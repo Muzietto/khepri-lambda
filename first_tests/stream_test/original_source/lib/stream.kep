@@ -1,0 +1,66 @@
+ // Declare a package and some exports
+package (stream cons first rest forEach foldl reverse toArray from (+<))
+{
+// Declare some immutable bindings.
+// These are only visible in the package.
+var NIL := null;
+
+// Using Khepri's lambda syntax.
+// Lambda functions can be inlined by the compiler.
+var flip := \f -> \x y -> f(y, x);
+
+var constant := \x -> \ -> x;
+
+// Export a symbol.
+// This assignment marks `stream` as the export and declares that this is
+// the final value of `stream`.
+// Uses Khepri lambda syntax for a lambda returning object literal.
+stream := \val f -> ({'first': val, 'rest': f});
+
+// Function application without parens in `constant`
+cons := \val -> \s -> stream(val, constant s);
+
+// Khepri's prefix and infix user defined operators can be used
+// almost anywhere an identifier symbol can. They are lexically
+// scoped as well, and you can even redefine builtin operators locally.
+(+<) := cons;
+
+// Convert an operator to a function and bind an argument
+var isEmpty := (=== NIL);
+
+// Unpacks parameters in lambda
+first = \{first} -> first;
+rest = \{rest} -> rest();
+
+// Lambda with function block body
+forEach = \f s -> {
+    for (var head = s; !isEmpty head; head = rest head)
+       f <| first head; // reverse pipe
+};
+
+foldl = \f z s -> {
+    var r = s;
+    forEach(\x -> { r = f(r, x); }, s);
+    return r;
+};
+
+// Partial application
+reverse = foldl@(flip cons, NIL);
+
+toArray = foldl@([].concat.bind([]), []);
+
+// Let Expression to bind a value in an expression
+from = let
+    // Recursive binding using `:=`
+    fromImpl := \arr i len ->
+        // Conditional expression
+        ? i >= len
+            :NIL
+            :stream(
+                arr.(i), // Get computed member i
+                fromImpl@(arr, i + 1, len))
+in
+    // Unpacking with as pattern.
+    \arr#{length} ->
+        fromImpl(arr, 0, length);
+}

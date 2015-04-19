@@ -10,13 +10,15 @@ var stream, cons, first, rest, forEach, foldl, reverse, toArray, from, __plus_lt
         "rest": f
     });
 }));
-(cons = (function(val, s) {
-    var f = (function() {
-        return s;
-    });
-    return ({
-        "first": val,
-        "rest": f
+(cons = (function(val) {
+    return (function(s) {
+        var f = (function() {
+            return s;
+        });
+        return ({
+            "first": val,
+            "rest": f
+        });
     });
 }));
 (__plus_lt = cons);
@@ -42,12 +44,14 @@ var stream, cons, first, rest, forEach, foldl, reverse, toArray, from, __plus_lt
     return r;
 }));
 (reverse = foldl.bind(null, (function(x, y) {
-    var f = (function() {
-        return x;
-    });
-    return ({
-        "first": y,
-        "rest": f
+    return (function(s) {
+        var f = (function() {
+            return s;
+        });
+        return ({
+            "first": y,
+            "rest": f
+        });
     });
 }), null));
 (toArray = foldl.bind(null, [].concat.bind([]), []));

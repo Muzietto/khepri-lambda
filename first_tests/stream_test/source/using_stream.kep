@@ -1,8 +1,7 @@
-package ()
-with
+package () with
     // Import the stream library and unpack some symbols.
     // We can now use our custom cons infix operator.
-    import './lib/stream' stream#{(+<), foldl, reverse}
+    import './lib/stream' stream#{foldl, reverse, cons}
 in {
     // Declare global.
     // Khepri is lexically scoped and vars must be defined before use
@@ -11,7 +10,7 @@ in {
     var s = stream.from [2, 3, 4];
 
     // pipelining
-    1 +< s // using our custom cons operator
+    cons 1 s // using our custom cons operator
         |> reverse
         |> foldl@((/), 120) // create function from operator
         |> console.log; // prints 5

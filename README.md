@@ -1,4 +1,6 @@
 # khepri-lambda
 Lambda calculus in Khepri (khepri-lang.org)
 
-But we start first by learning how to compile and link modules using both NPM and AMD packages management styles.
+Download, doubleclick on index.html and you're on your way...
+
+The project contains also the first experiments with compiling and linking modules, using both NPM and AMD packages management styles.

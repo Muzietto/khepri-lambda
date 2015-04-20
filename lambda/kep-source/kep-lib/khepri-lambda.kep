@@ -1,0 +1,12 @@
+
+package (
+  id
+  apply
+)
+{
+  id := \x -> x;
+  
+  apply := \x -> \y -> x y;
+  
+  
+}

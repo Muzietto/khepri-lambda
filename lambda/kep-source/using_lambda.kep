@@ -1,0 +1,16 @@
+
+package () with
+
+  import './kep-lib/khepri-lambda' 
+    lambda#{
+      id
+      
+    }
+
+in {
+  static console;
+  
+  var idd = id id; 
+  
+  console.log (idd 12);
+}

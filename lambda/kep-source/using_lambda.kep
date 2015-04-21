@@ -4,7 +4,11 @@ package () with
   import './kep-lib/khepri-lambda' 
     lambda#{
       id
-      
+      apply
+      self_apply
+      first
+      second
+      pair
     }
 
 in {
@@ -13,4 +17,8 @@ in {
   var idd = id id; 
   
   console.log (idd 12);
+  
+  var self_self = self_apply self_apply;
+  
+  var identity2 = \x -> apply id x;
 }

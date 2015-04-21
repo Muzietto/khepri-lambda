@@ -16,7 +16,7 @@ require.config({
 });
 
 define(['chai', 'mocha'], (function(chai, mocha) {
-    require(['./js-build/using_lambda'], function(require) {
+    require(['./js-build/test_lambda'], function(require) {
       mocha.run();
     });
 }));

@@ -1,25 +1,22 @@
-
+// main lambda components
 package (
   id
   apply
+  id2
   self_apply
-  identity2
   first
   second
   pair
 )
 {
-  id := \x -> x;
-  
-  apply := \x -> \y -> x y;
-  
-  self_apply := \s -> apply s s;
-  
-  identity2 := \x -> apply id x;
 
+  id := \x -> x;
+  apply := \x -> \y -> x y;
+  id2 := \x -> apply id x;
+  self_apply := \s -> s s;
   first := \x -> \y -> x;
   second := \x -> \y -> y;
-
-  pair := \x -> \y -> w -> w x y;
+  pair := \x -> \y -> \w -> w x y;
+  
   
 }

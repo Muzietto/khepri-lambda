@@ -4,7 +4,7 @@
 */
 define(["require", "exports"], (function(require, exports) {
     "use strict";
-    var id, apply, self_apply, identity2, first, second;
+    var id, apply, id2, self_apply, first, second, pair;
     (id = (function(x) {
         return x;
     }));
@@ -13,11 +13,11 @@ define(["require", "exports"], (function(require, exports) {
             return x(y);
         });
     }));
+    (id2 = (function(x) {
+        return x;
+    }));
     (self_apply = (function(s) {
         return s(s);
-    }));
-    (identity2 = (function(x) {
-        return x;
     }));
     (first = (function(x) {
         return (function(y) {
@@ -29,10 +29,18 @@ define(["require", "exports"], (function(require, exports) {
             return y;
         });
     }));
+    (pair = (function(x) {
+        return (function(y) {
+            return (function(w) {
+                return w(x)(y);
+            });
+        });
+    }));
     (exports["id"] = id);
     (exports["apply"] = apply);
+    (exports["id2"] = id2);
     (exports["self_apply"] = self_apply);
-    (exports["identity2"] = identity2);
     (exports["first"] = first);
     (exports["second"] = second);
+    (exports["pair"] = pair);
 }));

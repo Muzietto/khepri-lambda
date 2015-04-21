@@ -1,0 +1,35 @@
+
+package (
+  idd
+  self_self
+  es23aii
+  es23bii
+  double
+  es23cii
+  
+) 
+
+with import './kep-lib/khepri-lambda' 
+  lambda#{
+    id
+    id2
+    apply
+    self_apply
+    first
+    second
+    pair
+  }
+
+in {
+
+  idd := id id;
+  double := \x -> 2*x;
+
+  // next one would blow the stack
+  //self_self := self_apply self_apply;
+   
+  // es 2.3
+  es23aii := apply apply id;
+  es23bii := \x -> \y -> pair x y id;
+  es23cii := self_apply (self_apply second);
+}

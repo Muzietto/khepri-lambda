@@ -2,14 +2,16 @@
 package (
   idd
   self_self
-  es23aii
-  es23bii
   double
-  es23cii
+  test2
+  triplet
+  first_of_3
+  second_of_3
+  third_of_3
   
 ) 
 
-with import './kep-lib/khepri-lambda' 
+with import './lib/khepri-lambda' 
   lambda#{
     id
     id2
@@ -18,18 +20,32 @@ with import './kep-lib/khepri-lambda'
     first
     second
     pair
+    
   }
 
 in {
+  test2 := {};
 
   idd := id id;
   double := \x -> 2*x;
 
   // next one would blow the stack
   //self_self := self_apply self_apply;
-   
+
   // es 2.3
-  es23aii := apply apply id;
-  es23bii := \x -> \y -> pair x y id;
-  es23cii := self_apply (self_apply second);
+  var dodici = id 12;
+
+  test2._es23a := apply (apply id) 12 === dodici;
+  test2._es23b := (\x -> \y -> pair x y id) double 6 ===  apply double 6; 
+  test2._es23c := self_apply (self_apply second) 12 === dodici;  
+
+  // es 2.4
+  triplet := \x -> \y -> \z -> \w -> w x y z;  
+  first_of_3 := \x -> \y -> \z -> x;
+  second_of_3 := \x -> \y -> \z -> y;
+  third_of_3 := \x -> \y -> \z -> z;
+
+  test2._es24a := triplet 12 13 14 first_of_3 === dodici;
+  test2._es24b := triplet 11 12 13 second_of_3 === dodici;
+  test2._es24c := triplet 10 11 12 third_of_3 === dodici;
 }

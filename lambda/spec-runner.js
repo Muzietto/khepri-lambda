@@ -1,9 +1,9 @@
 
 require.config({
   'paths': {
-    'mocha': './js-build/js-lib/mocha',
-    'chai': './js-build/js-lib/chai',
-    'sinon': './js-build/js-lib/sinon-1.11.1'
+    'mocha': './js-lib/mocha',
+    'chai': './js-lib/chai',
+    'sinon': './js-lib/sinon-1.11.1'
   },
   shim: {
     'mocha': {
@@ -16,7 +16,7 @@ require.config({
 });
 
 define(['chai', 'mocha'], (function(chai, mocha) {
-    require(['./js-build/test_lambda'], function(require) {
+    require(['./test_lambda'], function(require) {
       mocha.run();
     });
 }));

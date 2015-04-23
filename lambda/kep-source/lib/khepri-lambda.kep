@@ -1,0 +1,25 @@
+// main lambda components
+package (
+  id, apply, self_apply
+  pair, first, second
+  _true, _false, cond
+  not, and, or
+)
+{
+  // ch 2
+  id := \x -> x;
+  apply := \x -> \y -> x y;
+  self_apply := \s -> s s;
+  pair := \x -> \y -> \w -> w x y;
+  first := \x -> \y -> x;
+  second := \x -> \y -> y;
+  
+  // ch 3
+  _true := first;
+  _false := second;
+  cond := pair;
+  not := \x -> x _false _true;
+  and := \x -> \y -> x y _false;
+  or := \x -> \y -> x _true y;
+  
+}

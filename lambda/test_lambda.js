@@ -26,9 +26,11 @@ define([
 
     describe('includes chapter 3 stuff',function(){
       for (var testcase in ch3suite){
-        it(testcase,function(){
-            expect(ch3suite[testcase]).to.be.ok;
-        });
+        (function(tc){
+          it(tc,function(){
+              expect(ch3suite[tc]).to.be.ok;
+          });
+        })(testcase);
       }
     });
 

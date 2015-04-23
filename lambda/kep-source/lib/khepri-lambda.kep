@@ -1,15 +1,21 @@
 // main lambda components
 package (
   id, apply, self_apply
+  constant
   pair, first, second
   _true, _false, cond
   not, and, or
+  succ, pred, is_zero
+  zero, one, two, three, four, five, six, seven, eight, nine
+  ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
 )
 {
   // ch 2
   id := \x -> x;
   apply := \x -> \y -> x y;
   self_apply := \s -> s s;
+  constant := \c -> \ -> c;
+  
   pair := \x -> \y -> \w -> w x y;
   first := \x -> \y -> x;
   second := \x -> \y -> y;
@@ -21,5 +27,32 @@ package (
   not := \x -> x _false _true;
   and := \x -> \y -> x y _false;
   or := \x -> \y -> x _true y;
+  
+  succ := \n -> pair _false n;
+  pred := \n -> n second; // NB: pred zero fails!!!
+  //pred := \n -> cond (is_zero n) zero (n second);
+  zero := id;
+  is_zero := \n -> n first; // REM first === _true
+  
+  one := succ zero;
+  two := succ one;
+  three := succ two;
+  four := succ three;
+  five := succ four;
+  six := succ five;
+  seven := succ six;
+  eight := succ seven;
+  nine := succ eight;
+  ten := succ nine;
+  eleven := succ ten;
+  twelve := succ eleven;
+  thirteen := succ twelve;
+  fourteen := succ thirteen;
+  fifteen := succ fourteen;
+  sixteen := succ fifteen;
+  seventeen := succ sixteen;
+  eighteen := succ seventeen;
+  nineteen := succ eighteen;
+  twenty := succ nineteen;
   
 }

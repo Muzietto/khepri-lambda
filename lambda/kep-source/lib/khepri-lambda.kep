@@ -29,8 +29,8 @@ package (
   or := \x -> \y -> x _true y;
   
   succ := \n -> pair _false n;
-  pred := \n -> n second; // NB: pred zero fails!!!
-  //pred := \n -> cond (is_zero n) zero (n second);
+  //pred := \n -> n second; // NB: pred zero fails!!!
+  pred := \n -> (((is_zero n) zero) (n second)) ;
   zero := id;
   is_zero := \n -> n first; // REM first === _true
   

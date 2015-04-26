@@ -62,7 +62,7 @@ define(["require", "exports"], (function(require, exports) {
         });
     }));
     (pred = (function(n) {
-        return n(second);
+        return is_zero(n)(zero)(n(second));
     }));
     (zero = id);
     (is_zero = (function(n) {

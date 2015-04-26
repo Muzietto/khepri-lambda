@@ -9,7 +9,7 @@ package ( test3 ) with import './lib/khepri-lambda' lambda#{
   succ, pred, is_zero
   zero, one, two, three, four, five, six, seven, eight, nine
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
-  
+
 }
 
 in {
@@ -25,16 +25,46 @@ in {
   test3.false_or_false_is_false := or _false _false === _false;
   test3.true_or_false_is_true := or _true _false === _true;
   
-  var count = \n -> ? is_zero n : 0 : 1 + count(pred n);  // fails on pred one!!!
-  //test3.trying_count := count(one) === 1 + count(zero);
-  
-  test3.succ_succ_zero_is_two := succ (succ zero) === two;
-  test3.pred_one_is_zero := pred one === zero;
-  test3.pred_zero_is_zero := pred zero === zero;
-  test3.pred_one_is_not_two := pred one === not two;
-  test3.pred_pred_three_is_one := pred (pred three) === one;
-  test3.one_is_pred_pred_three := one === pred (pred three);
+  var _count := \n -> ? (is_zero n === _true) : 0 : 1 + _count(pred n);
+  test3.trying_count := _count(one) === 1 + _count(zero);
+  var _equals := \a -> \b -> _count(a) === _count(b);
+  test3.trying_equals := _equals one (succ zero);
+  test3.trying_not_equals := !_equals one ten;
+
+  test3.succ_succ_zero_is_two := _equals (succ (succ zero)) two;
+  test3.pred_one_is_zero := _equals (pred one)  zero;
+  test3.pred_zero_is_zero := _equals (pred zero)  zero;
+  test3.pred_one_is_not_two := !_equals (pred one) two;
+  test3.pred_pred_three_is_one := _equals (pred (pred three)) one;
+  test3.one_is_pred_pred_three := _equals one (pred (pred three));
   test3.is_zero_zero_is_true := is_zero zero === _true;
   test3.is_zero_ten_is_false := is_zero ten === _false;
+
+  //var implies := \x -> \y -> x y _true;
+  var implies := \x -> \y -> ((y _true) (not x));
   
+  test3.es31_implies_false_false_is_true := implies _false _false === _true;
+  test3.es31_implies_false_true_is_true := implies _false _true === _true;
+  test3.es31_implies_true_false_is_false := implies _true _false === _false;
+  test3.es31_implies_true_true_is_true := implies _true _true === _true;
+  
+  var es33ai = \x -> \y -> and (not x) (not y);
+  var es33aii = \x -> \y -> not (or x y);
+  test3.es33a_false_false := es33ai _false _false === es33aii _false _false;
+  test3.es33a_true_false  := es33ai _true  _false === es33aii _true  _false;
+  test3.es33a_false_true  := es33ai _false _true  === es33aii _false _true;
+  test3.es33a_true_true   := es33ai _true  _true  === es33aii _true  _true;
+
+  var es33bi = implies;
+  var es33bii = \x -> \y -> implies (not y) (not x);
+  test3.es33b_false_false := es33bi _false _false === es33bii _false _false;
+  test3.es33b_true_false  := es33bi _true  _false === es33bii _true  _false;
+  test3.es33b_false_true  := es33bi _false _true  === es33bii _false _true;
+  test3.es33b_true_true   := es33bi _true  _true  === es33bii _true  _true;
+
+
+
+
+  
+
 }

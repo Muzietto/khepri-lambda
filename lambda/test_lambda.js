@@ -27,9 +27,15 @@ define([
     describe('includes chapter 3 stuff',function(){
       for (var testcase in ch3suite){
         (function(tc){
-          it(tc,function(){
-              expect(ch3suite[tc]).to.be.ok;
-          });
+          if (tc.indexOf('skip') === -1) {
+            it(tc,function(){
+                expect(ch3suite[tc]).to.be.ok;
+            });
+          } else {
+            it.skip(tc,function(){
+                expect(ch3suite[tc]).to.be.ok;
+            });            
+          }
         })(testcase);
       }
     });

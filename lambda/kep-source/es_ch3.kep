@@ -48,6 +48,13 @@ in {
   test3.es31_implies_true_false_is_false := implies _true _false === _false;
   test3.es31_implies_true_true_is_true := implies _true _true === _true;
   
+  var equiv := \x -> \y -> ((x y) (not y));
+  
+  test3.es3e_equiv_false_false_is_true := equiv _false _false === _true;
+  test3.es3e_equiv_false_true_is_true  := equiv _false _true  === _false;
+  test3.es3e_equiv_true_false_is_false := equiv _true  _false === _false;
+  test3.es3e_equiv_true_true_is_true   := equiv _true  _true  === _true;
+  
   var es33ai = \x -> \y -> and (not x) (not y);
   var es33aii = \x -> \y -> not (or x y);
   test3.es33a_false_false := es33ai _false _false === es33aii _false _false;
@@ -62,9 +69,22 @@ in {
   test3.es33b_false_true  := es33bi _false _true  === es33bii _false _true;
   test3.es33b_true_true   := es33bi _true  _true  === es33bii _true  _true;
 
+  var es33ci = not;
+  var es33cii = \x -> not not (not x);
+  test3.es33c_false := es33ci _false === es33cii _false;
+  test3.es33c_true  := es33ci _true  === es33cii _true ;
 
+  var es33ei = equiv;
+  var es33eii = \x -> \y -> ((and (implies x y)) (implies y x));
+  test3.es33e_false_false := es33ei _false _false === es33eii _false _false;
+  test3.es33e_true_false  := es33ei _true  _false === es33eii _true  _false;
+  test3.es33e_false_true  := es33ei _false _true  === es33eii _false _true;
+  test3.es33e_true_true   := es33ei _true  _true  === es33eii _true  _true;
 
-
-  
-
+  var es33di = implies;
+  var es33dii = \x -> \y -> not (and x (not y));
+  test3.es33d_false_false := es33di _false _false === es33dii _false _false;
+  test3.es33d_true_false  := es33di _true  _false === es33dii _true  _false;
+  test3.es33d_false_true  := es33di _false _true  === es33dii _false _true;
+  test3.es33d_true_true   := es33di _true  _true  === es33dii _true  _true;
 }

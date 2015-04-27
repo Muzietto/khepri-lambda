@@ -63,6 +63,10 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     (test3.es31_implies_false_true_is_true = (_true(_true)(not(_false)) === _true));
     (test3.es31_implies_true_false_is_false = (_false(_true)(not(_true)) === _false));
     (test3.es31_implies_true_true_is_true = (_true(_true)(not(_true)) === _true));
+    (test3.es3e_equiv_false_false_is_true = (_false(_false)(not(_false)) === _true));
+    (test3.es3e_equiv_false_true_is_true = (_false(_true)(not(_true)) === _false));
+    (test3.es3e_equiv_true_false_is_false = (_true(_false)(not(_false)) === _false));
+    (test3.es3e_equiv_true_true_is_true = (_true(_true)(not(_true)) === _true));
     (test3.es33a_false_false = (and(not(_false))(not(_false)) === not(or(_false)(_false))));
     (test3.es33a_true_false = (and(not(_true))(not(_false)) === not(or(_true)(_false))));
     (test3.es33a_false_true = (and(not(_false))(not(_true)) === not(or(_false)(_true))));
@@ -79,5 +83,18 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     var x2, y2;
     (test3.es33b_true_true = (_true(_true)(not(_true)) === ((x2 = not(_true)), (y2 = not(_true)), y2(_true)(not(
         x2)))));
+    (test3.es33c_false = (not(_false) === not(not(not(_false)))));
+    (test3.es33c_true = (not(_true) === not(not(not(_true)))));
+    (test3.es33e_false_false = (_false(_false)(not(_false)) === and(_false(_true)(not(_false)))(_false(_true)(
+        not(_false)))));
+    (test3.es33e_true_false = (_true(_false)(not(_false)) === and(_false(_true)(not(_true)))(_true(_true)(not(
+        _false)))));
+    (test3.es33e_false_true = (_false(_true)(not(_true)) === and(_true(_true)(not(_false)))(_false(_true)(not(
+        _true)))));
+    (test3.es33e_true_true = (_true(_true)(not(_true)) === and(_true(_true)(not(_true)))(_true(_true)(not(_true)))));
+    (test3.es33d_false_false = (_false(_true)(not(_false)) === not(and(_false(not(_false))))));
+    (test3.es33d_true_false = (_false(_true)(not(_true)) === not(and(_true(not(_false))))));
+    (test3.es33d_false_true = (_true(_true)(not(_false)) === not(and(_false(not(_true))))));
+    (test3.es33d_true_true = (_true(_true)(not(_true)) === not(and(_true(not(_true))))));
     (exports["test3"] = test3);
 }));

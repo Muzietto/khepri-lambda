@@ -4,10 +4,11 @@
 */
 define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports, lambda) {
     "use strict";
-    var test4, _true = lambda["_true"],
-        _false = lambda["_false"],
-        not = lambda["not"];
+    var test4, one = lambda["one"],
+        two = lambda["two"],
+        equals = lambda["equals"],
+        mult = lambda["mult"];
     (test4 = ({}));
-    (test4.not_true_is_false = (not(_true) === _false));
+    (test4.mult_one_two_is_two = equals(mult(one)(two))(two));
     (exports["test4"] = test4);
 }));

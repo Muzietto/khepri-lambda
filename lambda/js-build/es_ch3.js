@@ -16,7 +16,17 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
         one = lambda["one"],
         two = lambda["two"],
         three = lambda["three"],
-        ten = lambda["ten"];
+        four = lambda["four"],
+        five = lambda["five"],
+        six = lambda["six"],
+        seven = lambda["seven"],
+        eight = lambda["eight"],
+        nine = lambda["nine"],
+        ten = lambda["ten"],
+        eleven = lambda["eleven"],
+        twelve = lambda["twelve"],
+        count = lambda["count"],
+        equals = lambda["equals"];
     (test3 = ({}));
     (test3.not_true_is_false = (not(_true) === _false));
     (test3.not_false_is_true = (not(_false) === _true));
@@ -25,38 +35,15 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     (test3.false_and_true_is_false = (and(_false)(_true) === _false));
     (test3.false_or_false_is_false = (or(_false)(_false) === _false));
     (test3.true_or_false_is_true = (or(_true)(_false) === _true));
-    var _count = (function(n) {
-        return ((is_zero(n) === _true) ? 0 : (1 + _count(pred(n))));
-    });
-    (test3.trying_count = (((is_zero(one) === _true) ? 0 : (1 + _count(pred(one)))) === (1 + ((is_zero(zero) ===
-        _true) ? 0 : (1 + _count(pred(zero)))))));
-    var a = one(succ(zero));
-    (test3.trying_equals = (function(b) {
-        return (((is_zero(a) === _true) ? 0 : (1 + _count(pred(a)))) === ((is_zero(b) === _true) ? 0 :
-            (1 + _count(pred(b)))));
-    }));
-    (test3.trying_not_equals = (!(((is_zero(one) === _true) ? 0 : (1 + _count(pred(one)))) === ((is_zero(ten) ===
-        _true) ? 0 : (1 + _count(pred(ten)))))));
-    var a0 = succ(succ(zero));
-    (test3.succ_succ_zero_is_two = (((is_zero(a0) === _true) ? 0 : (1 + _count(pred(a0)))) === ((is_zero(two) ===
-        _true) ? 0 : (1 + _count(pred(two))))));
-    var a1 = pred(one);
-    (test3.pred_one_is_zero = (((is_zero(a1) === _true) ? 0 : (1 + _count(pred(a1)))) === ((is_zero(zero) ===
-        _true) ? 0 : (1 + _count(pred(zero))))));
-    var a2 = pred(zero);
-    (test3.pred_zero_is_zero = (((is_zero(a2) === _true) ? 0 : (1 + _count(pred(a2)))) === ((is_zero(zero) ===
-        _true) ? 0 : (1 + _count(pred(zero))))));
-    var a3;
-    (test3.pred_one_is_not_two = (!((a3 = pred(one)), (((is_zero(a3) === _true) ? 0 : (1 + _count(pred(a3)))) ===
-        ((is_zero(two) === _true) ? 0 : (1 + _count(pred(two))))))));
-    var a4 = pred(pred(three));
-    (test3.pred_pred_three_is_one = (((is_zero(a4) === _true) ? 0 : (1 + _count(pred(a4)))) === ((is_zero(one) ===
-        _true) ? 0 : (1 + _count(pred(one))))));
-    var a5 = one(pred(pred(three)));
-    (test3.one_is_pred_pred_three = (function(b) {
-        return (((is_zero(a5) === _true) ? 0 : (1 + _count(pred(a5)))) === ((is_zero(b) === _true) ? 0 :
-            (1 + _count(pred(b)))));
-    }));
+    (test3.trying_count = (count(one) === (1 + count(zero))));
+    (test3.trying_equals = equals(one(succ(zero))));
+    (test3.trying_not_equals = (!equals(one)(ten)));
+    (test3.succ_succ_zero_is_two = equals(succ(succ(zero)))(two));
+    (test3.pred_one_is_zero = equals(pred(one))(zero));
+    (test3.pred_zero_is_zero = equals(pred(zero))(zero));
+    (test3.pred_one_is_not_two = (!equals(pred(one))(two)));
+    (test3.pred_pred_three_is_one = equals(pred(pred(three)))(one));
+    (test3.one_is_pred_pred_three = equals(one(pred(pred(three)))));
     (test3.is_zero_zero_is_true = (is_zero(zero) === _true));
     (test3.is_zero_ten_is_false = (is_zero(ten) === _false));
     (test3.es31_implies_false_false_is_true = (_false(_true)(not(_false)) === _true));
@@ -96,5 +83,17 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     (test3.es33d_true_false = (_false(_true)(not(_true)) === not(and(_true(not(_false))))));
     (test3.es33d_false_true = (_true(_true)(not(_false)) === not(and(_false(not(_true))))));
     (test3.es33d_true_true = (_true(_true)(not(_true)) === not(and(_true(not(_true))))));
+    (test3.es34_2 = (succ(pred)(two) === pred(succ)(two)));
+    (test3.es34_3 = (succ(pred)(three) === pred(succ)(three)));
+    (test3.es34_4 = (succ(pred)(four) === pred(succ)(four)));
+    (test3.es34_5 = (succ(pred)(five) === pred(succ)(five)));
+    (test3.es34_6 = (succ(pred)(six) === pred(succ)(six)));
+    (test3.es34_7 = (succ(pred)(seven) === pred(succ)(seven)));
+    (test3.es34_8 = (succ(pred)(eight) === pred(succ)(eight)));
+    (test3.es34_9 = (succ(pred)(nine) === pred(succ)(nine)));
+    (test3.es34_10 = (succ(pred)(ten) === pred(succ)(ten)));
+    (test3.es34_11 = (succ(pred)(eleven) === pred(succ)(eleven)));
+    (test3.es34_12 = (succ(pred)(twelve) === pred(succ)(twelve)));
+    (test3.es34_12a = (succ(pred)(succ)(pred)(twelve) === pred(succ)(pred)(succ)(twelve)));
     (exports["test3"] = test3);
 }));

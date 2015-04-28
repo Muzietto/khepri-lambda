@@ -5,8 +5,9 @@
 define(["require", "exports"], (function(require, exports) {
     "use strict";
     var id, apply, self_apply, constant, pair, first, second, _true, _false, cond, not, and, or, succ, pred,
-            is_zero, zero, one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen,
-            fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty;
+            is_zero, _succ, _pred, _is_zero, _zero, zero, one, two, three, four, five, six, seven, eight, nine,
+            ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty,
+            count, equals, add, add2, mult, recursive;
     (id = (function(x) {
         return x;
     }));
@@ -62,11 +63,62 @@ define(["require", "exports"], (function(require, exports) {
         });
     }));
     (pred = (function(n) {
-        return is_zero(n)(zero)(n(second));
+        var x = zero,
+            y = n(second),
+            w = is_zero(n);
+        return w(x)(y);
     }));
     (zero = id);
     (is_zero = (function(n) {
         return n(first);
+    }));
+    (_zero = (function(f) {
+        return (function(x) {
+            return x;
+        });
+    }));
+    (_succ = (function(n) {
+        return (function(f) {
+            return (function(x) {
+                return f(n(f)(x));
+            });
+        });
+    }));
+    (count = (function(n) {
+        var y, w;
+        return ((n(first) === first) ? 0 : (1 + count(((y = n(second)), (w = n(first)), w(id)(y)))));
+    }));
+    (equals = (function(a) {
+        return (function(b) {
+            var y, w, y0, w0;
+            return (((a(first) === first) ? 0 : (1 + count(((y = a(second)), (w = a(first)), w(id)(
+                y))))) === ((b(first) === first) ? 0 : (1 + count(((y0 = b(second)), (w0 = b(
+                first)), w0(id)(y0))))));
+        });
+    }));
+    (add2 = (function(f) {
+        return (function(x) {
+            return (function(y) {
+                var y0, w;
+                return y(first)(x)(f(f)((function(w) {
+                    return w(second)(x);
+                }))(((y0 = y(second)), (w = y(first)), w(id)(y0))));
+            });
+        });
+    }));
+    (add = (function(x) {
+        return (function(y) {
+            var y0, w;
+            return y(first)(x)(add2(add2)((function(w) {
+                return w(second)(x);
+            }))(((y0 = y(second)), (w = y(first)), w(id)(y0))));
+        });
+    }));
+    (mult = (function(x) {
+        return (function(y) {
+            var y0, w;
+            return y(first)(id)(add(x(mult(x(((y0 = y(second)), (w = y(first)), w(id)(y0)))))));
+        });
     }));
     (one = (function(w) {
         return w(second)(id);
@@ -144,6 +196,10 @@ define(["require", "exports"], (function(require, exports) {
     (exports["succ"] = succ);
     (exports["pred"] = pred);
     (exports["is_zero"] = is_zero);
+    (exports["_succ"] = _succ);
+    (exports["_pred"] = _pred);
+    (exports["_is_zero"] = _is_zero);
+    (exports["_zero"] = _zero);
     (exports["zero"] = zero);
     (exports["one"] = one);
     (exports["two"] = two);
@@ -165,4 +221,10 @@ define(["require", "exports"], (function(require, exports) {
     (exports["eighteen"] = eighteen);
     (exports["nineteen"] = nineteen);
     (exports["twenty"] = twenty);
+    (exports["count"] = count);
+    (exports["equals"] = equals);
+    (exports["add"] = add);
+    (exports["add2"] = add2);
+    (exports["mult"] = mult);
+    (exports["recursive"] = recursive);
 }));

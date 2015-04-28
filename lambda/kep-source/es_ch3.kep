@@ -9,6 +9,7 @@ package ( test3 ) with import './lib/khepri-lambda' lambda#{
   succ, pred, is_zero
   zero, one, two, three, four, five, six, seven, eight, nine
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
+  count, equals
 
 }
 
@@ -24,19 +25,17 @@ in {
   test3.false_and_true_is_false := and _false _true === _false;
   test3.false_or_false_is_false := or _false _false === _false;
   test3.true_or_false_is_true := or _true _false === _true;
-  
-  var _count := \n -> ? (is_zero n === _true) : 0 : 1 + _count(pred n);
-  test3.trying_count := _count(one) === 1 + _count(zero);
-  var _equals := \a -> \b -> _count(a) === _count(b);
-  test3.trying_equals := _equals one (succ zero);
-  test3.trying_not_equals := !_equals one ten;
 
-  test3.succ_succ_zero_is_two := _equals (succ (succ zero)) two;
-  test3.pred_one_is_zero := _equals (pred one)  zero;
-  test3.pred_zero_is_zero := _equals (pred zero)  zero;
-  test3.pred_one_is_not_two := !_equals (pred one) two;
-  test3.pred_pred_three_is_one := _equals (pred (pred three)) one;
-  test3.one_is_pred_pred_three := _equals one (pred (pred three));
+  test3.trying_count := count(one) === 1 + count(zero);
+  test3.trying_equals := equals one (succ zero);
+  test3.trying_not_equals := !equals one ten;
+
+  test3.succ_succ_zero_is_two := equals (succ (succ zero)) two;
+  test3.pred_one_is_zero := equals (pred one) zero;
+  test3.pred_zero_is_zero := equals (pred zero) zero;
+  test3.pred_one_is_not_two := !equals (pred one) two;
+  test3.pred_pred_three_is_one := equals (pred (pred three)) one;
+  test3.one_is_pred_pred_three := equals one (pred (pred three));
   test3.is_zero_zero_is_true := is_zero zero === _true;
   test3.is_zero_ten_is_false := is_zero ten === _false;
 
@@ -87,4 +86,21 @@ in {
   test3.es33d_true_false  := es33di _true  _false === es33dii _true  _false;
   test3.es33d_false_true  := es33di _false _true  === es33dii _false _true;
   test3.es33d_true_true   := es33di _true  _true  === es33dii _true  _true;
+  
+  var succ_pred = \n -> succ pred n;
+  var pred_succ = \n -> pred succ n;
+  //test3.es34_1 = succ_pred one === pred_succ one; // minor glitch
+  test3.es34_2 = succ_pred two === pred_succ two;
+  test3.es34_3 = succ_pred three === pred_succ three;
+  test3.es34_4 = succ_pred four === pred_succ four;
+  test3.es34_5 = succ_pred five === pred_succ five;
+  test3.es34_6 = succ_pred six === pred_succ six;
+  test3.es34_7 = succ_pred seven === pred_succ seven;
+  test3.es34_8 = succ_pred eight === pred_succ eight;
+  test3.es34_9 = succ_pred nine === pred_succ nine;
+  test3.es34_10 = succ_pred ten === pred_succ ten;
+  test3.es34_11 = succ_pred eleven === pred_succ eleven;
+  test3.es34_12 = succ_pred twelve === pred_succ twelve;
+  test3.es34_12a = succ pred succ pred twelve === pred succ pred succ twelve;
+  //test3.es34_12b = succ succ pred pred twelve === pred pred succ succ twelve; // why not?
 }

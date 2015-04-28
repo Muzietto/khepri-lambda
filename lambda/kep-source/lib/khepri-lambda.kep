@@ -6,8 +6,11 @@ package (
   _true, _false, cond
   not, and, or
   succ, pred, is_zero
+  _succ, _pred, _is_zero, _zero
   zero, one, two, three, four, five, six, seven, eight, nine
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
+  count, equals
+  add, add2, mult, recursive
 )
 {
   // ch 2
@@ -30,10 +33,27 @@ package (
   
   succ := \n -> pair _false n;
   //pred := \n -> n second; // NB: pred zero fails!!!
-  pred := \n -> (((is_zero n) zero) (n second)) ;
+  //pred := \n -> (((is_zero n) zero) (n second)) ;
+  pred := \n -> (((cond zero) (n second)) (is_zero n));
   zero := id;
   is_zero := \n -> n first; // REM first === _true
+
+  _zero := \f -> \x -> x;
+  _succ := \n -> \f -> \x -> f ((n f) x);
   
+  count := \n -> ? (is_zero n === _true) : 0 : 1 + count(pred n);
+  equals := \a -> \b -> count(a) === count(b);
+
+  // ch 4
+  //add := \x -> \y -> (((is_zero y) x) (add (succ x) (pred y)));
+  add2 := \f -> \x -> \y -> (((is_zero y) x) ((((f f) (succ x)) (pred y))));
+  add = add2 add2;
+  
+  mult := \x -> \y -> (((is_zero y) zero) (add x (mult x (pred y))));
+
+//  recursive := \f -> (\s 
+  
+  // additional stuff  
   one := succ zero;
   two := succ one;
   three := succ two;

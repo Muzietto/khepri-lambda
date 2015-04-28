@@ -5,8 +5,8 @@ package (
   pair, first, second
   _true, _false, cond
   not, and, or
+  first3, second3, third3
   succ, pred, is_zero
-  _succ, _pred, _is_zero, _zero
   zero, one, two, three, four, five, six, seven, eight, nine
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
   count, equals
@@ -31,15 +31,20 @@ package (
   and := \x -> \y -> x y _false;
   or := \x -> \y -> x _true y;
   
-  succ := \n -> pair _false n;
-  //pred := \n -> n second; // NB: pred zero fails!!!
-  //pred := \n -> (((is_zero n) zero) (n second)) ;
-  pred := \n -> (((cond zero) (n second)) (is_zero n));
-  zero := id;
-  is_zero := \n -> n first; // REM first === _true
+  //succ := \n -> pair _false n;
+  ////pred := \n -> n second; // NB: pred zero fails!!!
+  ////pred := \n -> (((is_zero n) zero) (n second)) ;
+  //pred := \n -> (((cond zero) (n second)) (is_zero n));
+  //zero := id;
+  //is_zero := \n -> n first; // REM first === _true
 
-  _zero := \f -> \x -> x;
-  _succ := \n -> \f -> \x -> f ((n f) x);
+  first3 := \x -> \y -> \z -> x;
+  second3 := \x -> \y -> \z -> y;
+  third3 := \x -> \y -> \z -> z;
+
+  zero := \f -> \x -> x; // second
+  succ := \n -> \f -> \x -> f ((n f) x);
+  is_zero := 
   
   count := \n -> ? (is_zero n === _true) : 0 : 1 + count(pred n);
   equals := \a -> \b -> count(a) === count(b);

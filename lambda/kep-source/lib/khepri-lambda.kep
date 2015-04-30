@@ -31,21 +31,26 @@ package (
   and := \x -> \y -> x y _false;
   or := \x -> \y -> x _true y;
   
-  //succ := \n -> pair _false n;
-  ////pred := \n -> n second; // NB: pred zero fails!!!
-  ////pred := \n -> (((is_zero n) zero) (n second)) ;
-  //pred := \n -> (((cond zero) (n second)) (is_zero n));
-  //zero := id;
-  //is_zero := \n -> n first; // REM first === _true
+  succ := \n -> pair _false n; // \w -> w _false n;
+  //pred := \n -> n second; // NB: pred zero fails!!!
+  //pred := \n -> (((is_zero n) zero) (n second)) ;
+  pred := \n -> (((cond zero) (n second)) (is_zero n));
+  zero := id;
+  is_zero := \n -> n first; // REM first === _true
 
-  first3 := \x -> \y -> \z -> x;
-  second3 := \x -> \y -> \z -> y;
-  third3 := \x -> \y -> \z -> z;
-
-  zero := \f -> \x -> x; // second
-  succ := \n -> \f -> \x -> f ((n f) x);
-  is_zero := 
-  
+  // CHURCH NUMERALS
+  //first3 := \x -> \y -> \z -> x;
+  //second3 := \x -> \y -> \z -> y;
+  //third3 := \x -> \y -> \z -> z;
+  //
+  //zero := \f -> \x -> x; // second
+  //one  := \f -> \x -> f x;
+  //two  := \f -> \x -> f (f x);
+  //three:= \f -> \x -> f (f (f x));
+  //
+  //succ := \n -> \f -> \x -> f ((n f) x);
+  //is_zero := \n -> n second === 
+  //
   count := \n -> ? (is_zero n === _true) : 0 : 1 + count(pred n);
   equals := \a -> \b -> count(a) === count(b);
 

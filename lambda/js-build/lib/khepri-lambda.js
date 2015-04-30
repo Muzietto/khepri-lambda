@@ -4,8 +4,8 @@
 */
 define(["require", "exports"], (function(require, exports) {
     "use strict";
-    var id, apply, self_apply, constant, pair, first, second, _true, _false, cond, not, and, or, succ, pred,
-            is_zero, _succ, _pred, _is_zero, _zero, zero, one, two, three, four, five, six, seven, eight, nine,
+    var id, apply, self_apply, constant, pair, first, second, _true, _false, cond, not, and, or, first3,
+            second3, third3, succ, pred, is_zero, zero, one, two, three, four, five, six, seven, eight, nine,
             ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty,
             count, equals, add, add2, mult, recursive;
     (id = (function(x) {
@@ -71,18 +71,6 @@ define(["require", "exports"], (function(require, exports) {
     (zero = id);
     (is_zero = (function(n) {
         return n(first);
-    }));
-    (_zero = (function(f) {
-        return (function(x) {
-            return x;
-        });
-    }));
-    (_succ = (function(n) {
-        return (function(f) {
-            return (function(x) {
-                return f(n(f)(x));
-            });
-        });
     }));
     (count = (function(n) {
         var y, w;
@@ -193,13 +181,12 @@ define(["require", "exports"], (function(require, exports) {
     (exports["not"] = not);
     (exports["and"] = and);
     (exports["or"] = or);
+    (exports["first3"] = first3);
+    (exports["second3"] = second3);
+    (exports["third3"] = third3);
     (exports["succ"] = succ);
     (exports["pred"] = pred);
     (exports["is_zero"] = is_zero);
-    (exports["_succ"] = _succ);
-    (exports["_pred"] = _pred);
-    (exports["_is_zero"] = _is_zero);
-    (exports["_zero"] = _zero);
     (exports["zero"] = zero);
     (exports["one"] = one);
     (exports["two"] = two);

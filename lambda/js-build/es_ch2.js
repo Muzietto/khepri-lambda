@@ -14,10 +14,13 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     (double = (function(x) {
         return (2 * x);
     }));
-    var dodici = id(12);
-    (test2._es23a = (apply(apply(id))(12) === dodici));
-    (test2._es23b = (pair(double)(6)(id) === apply(double)(6)));
-    (test2._es23c = (self_apply(self_apply(second))(12) === dodici));
+    (test2.apply_id_is_id = (apply(id) === id));
+    (test2.apply_apply_is_apply = (apply(apply) === apply));
+    (test2._es23a = (apply(apply(id)) === id));
+    (test2._es23b = ((function(y) {
+        return pair(double)(y)(id);
+    }) === apply(double)));
+    (test2._es23c = (self_apply(self_apply(second)) === id));
     (triplet = (function(x) {
         return (function(y) {
             return (function(z) {
@@ -48,9 +51,9 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
             });
         });
     }));
-    (test2._es24a = (12 === dodici));
-    (test2._es24b = (12 === dodici));
-    (test2._es24c = (12 === dodici));
+    (test2._es24a = (12 === id(12)));
+    (test2._es24b = (12 === id(12)));
+    (test2._es24c = (12 === id(12)));
     (exports["idd"] = idd);
     (exports["self_self"] = self_self);
     (exports["double"] = double);

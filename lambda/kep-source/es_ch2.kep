@@ -31,13 +31,15 @@ in {
 
   // next one would blow the stack
   //self_self := self_apply self_apply;
+  
+  // free runs
+  test2.apply_id_is_id := apply id === id;
+  test2.apply_apply_is_apply := apply apply === apply;
 
   // es 2.3
-  var dodici = id 12;
-
-  test2._es23a := apply (apply id) 12 === dodici;
-  test2._es23b := (\x -> \y -> pair x y id) double 6 ===  apply double 6; 
-  test2._es23c := self_apply (self_apply second) 12 === dodici;  
+  test2._es23a := apply (apply id) === id;
+  test2._es23b := (\x -> \y -> pair x y id) double ===  apply double; 
+  test2._es23c := self_apply (self_apply second) === id;  
 
   // es 2.4
   triplet := \x -> \y -> \z -> \w -> w x y z;  
@@ -45,7 +47,7 @@ in {
   second_of_3 := \x -> \y -> \z -> y;
   third_of_3 := \x -> \y -> \z -> z;
 
-  test2._es24a := triplet 12 13 14 first_of_3 === dodici;
-  test2._es24b := triplet 11 12 13 second_of_3 === dodici;
-  test2._es24c := triplet 10 11 12 third_of_3 === dodici;
+  test2._es24a := triplet 12 13 14 first_of_3 === id 12;
+  test2._es24b := triplet 11 12 13 second_of_3 === id 12;
+  test2._es24c := triplet 10 11 12 third_of_3 === id 12;
 }

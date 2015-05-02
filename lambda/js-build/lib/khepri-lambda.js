@@ -7,7 +7,7 @@ define(["require", "exports"], (function(require, exports) {
     var id, apply, self_apply, constant, pair, first, second, _true, _false, cond, not, and, or, first3,
             second3, third3, succ, pred, is_zero, zero, one, two, three, four, five, six, seven, eight, nine,
             ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty,
-            count, equals, add, add2, mult, recursive;
+            count, equals, add, add2, mult, recursive, subtract;
     (id = (function(x) {
         return x;
     }));
@@ -57,116 +57,172 @@ define(["require", "exports"], (function(require, exports) {
             return x(first)(y);
         });
     }));
-    (succ = (function(n) {
-        return (function(w) {
-            return w(second)(n);
-        });
-    }));
-    (pred = (function(n) {
-        var x = zero,
-            y = n(second),
-            w = is_zero(n);
-        return w(x)(y);
-    }));
-    (zero = id);
-    (is_zero = (function(n) {
-        return n(first);
-    }));
-    (count = (function(n) {
-        var y, w;
-        return ((n(first) === first) ? 0 : (1 + count(((y = n(second)), (w = n(first)), w(id)(y)))));
-    }));
-    (equals = (function(a) {
-        return (function(b) {
-            var y, w, y0, w0;
-            return (((a(first) === first) ? 0 : (1 + count(((y = a(second)), (w = a(first)), w(id)(
-                y))))) === ((b(first) === first) ? 0 : (1 + count(((y0 = b(second)), (w0 = b(
-                first)), w0(id)(y0))))));
-        });
-    }));
-    (add2 = (function(f) {
+    (zero = (function(f) {
         return (function(x) {
-            return (function(y) {
-                var y0, w;
-                return y(first)(x)(f(f)((function(w) {
-                    return w(second)(x);
-                }))(((y0 = y(second)), (w = y(first)), w(id)(y0))));
+            return x;
+        });
+    }));
+    (succ = (function(n) {
+        return (function(f) {
+            return (function(x) {
+                return f(n(f)(x));
             });
         });
     }));
-    (add = (function(x) {
-        return (function(y) {
-            var y0, w;
-            return y(first)(x)(add2(add2)((function(w) {
-                return w(second)(x);
-            }))(((y0 = y(second)), (w = y(first)), w(id)(y0))));
+    (is_zero = (function(n) {
+        return n((function() {
+            return second;
+        }))(first);
+    }));
+    (pred = (function(n) {
+        return (function(F) {
+            return (function(X) {
+                return n((function(g) {
+                    return (function(h) {
+                        return h(g(F));
+                    });
+                }))((function() {
+                    return X;
+                }))(id);
+            });
         });
     }));
-    (mult = (function(x) {
-        return (function(y) {
-            var y0, w;
-            return y(first)(id)(add(x(mult(x(((y0 = y(second)), (w = y(first)), w(id)(y0)))))));
+    (add = (function(m) {
+        return (function(n) {
+            return (function(f) {
+                return (function(x) {
+                    return m(f)(n(f)(x));
+                });
+            });
         });
     }));
-    (one = (function(w) {
-        return w(second)(id);
+    (subtract = (function(m) {
+        return (function(n) {
+            return n(pred)(m);
+        });
     }));
-    (two = (function(w) {
-        return w(second)(one);
+    (mult = (function(m) {
+        return (function(n) {
+            return (function(f) {
+                return (function(x) {
+                    return m(n(f))(x);
+                });
+            });
+        });
     }));
-    (three = (function(w) {
-        return w(second)(two);
+    (count = (function(n) {
+        return n((function(x) {
+            return (x + 1);
+        }))(0);
     }));
-    (four = (function(w) {
-        return w(second)(three);
+    (equals = (function(a) {
+        return (function(b) {
+            return (a((function(x) {
+                return (x + 1);
+            }))(0) === b((function(x) {
+                return (x + 1);
+            }))(0));
+        });
     }));
-    (five = (function(w) {
-        return w(second)(four);
+    (one = (function(f) {
+        return (function(x) {
+            return f(x);
+        });
     }));
-    (six = (function(w) {
-        return w(second)(five);
+    (two = (function(f) {
+        return (function(x) {
+            return f(one(f)(x));
+        });
     }));
-    (seven = (function(w) {
-        return w(second)(six);
+    (three = (function(f) {
+        return (function(x) {
+            return f(f(one(f)(x)));
+        });
     }));
-    (eight = (function(w) {
-        return w(second)(seven);
+    (four = (function(f) {
+        return (function(x) {
+            return f(three(f)(x));
+        });
     }));
-    (nine = (function(w) {
-        return w(second)(eight);
+    (five = (function(f) {
+        return (function(x) {
+            return f(f(three(f)(x)));
+        });
     }));
-    (ten = (function(w) {
-        return w(second)(nine);
+    (six = (function(f) {
+        return (function(x) {
+            return f(five(f)(x));
+        });
     }));
-    (eleven = (function(w) {
-        return w(second)(ten);
+    (seven = (function(f) {
+        return (function(x) {
+            return f(f(five(f)(x)));
+        });
     }));
-    (twelve = (function(w) {
-        return w(second)(eleven);
+    (eight = (function(f) {
+        return (function(x) {
+            return f(seven(f)(x));
+        });
     }));
-    (thirteen = (function(w) {
-        return w(second)(twelve);
+    (nine = (function(f) {
+        return (function(x) {
+            return f(f(seven(f)(x)));
+        });
     }));
-    (fourteen = (function(w) {
-        return w(second)(thirteen);
+    (ten = (function(f) {
+        return (function(x) {
+            return f(nine(f)(x));
+        });
     }));
-    (fifteen = (function(w) {
-        return w(second)(fourteen);
+    (eleven = (function(f) {
+        return (function(x) {
+            return f(f(nine(f)(x)));
+        });
     }));
-    (sixteen = (function(w) {
-        return w(second)(fifteen);
+    (twelve = (function(f) {
+        return (function(x) {
+            return f(eleven(f)(x));
+        });
     }));
-    (seventeen = (function(w) {
-        return w(second)(sixteen);
+    (thirteen = (function(f) {
+        return (function(x) {
+            return f(f(eleven(f)(x)));
+        });
     }));
-    (eighteen = (function(w) {
-        return w(second)(seventeen);
+    (fourteen = (function(f) {
+        return (function(x) {
+            return f(thirteen(f)(x));
+        });
     }));
-    (nineteen = (function(w) {
-        return w(second)(eighteen);
+    (fifteen = (function(f) {
+        return (function(x) {
+            return f(f(thirteen(f)(x)));
+        });
     }));
-    (twenty = (function(w) {
-        return w(second)(nineteen);
+    (sixteen = (function(f) {
+        return (function(x) {
+            return f(fifteen(f)(x));
+        });
+    }));
+    (seventeen = (function(f) {
+        return (function(x) {
+            return f(f(fifteen(f)(x)));
+        });
+    }));
+    (eighteen = (function(f) {
+        return (function(x) {
+            return f(seventeen(f)(x));
+        });
+    }));
+    (nineteen = (function(f) {
+        return (function(x) {
+            return f(f(seventeen(f)(x)));
+        });
+    }));
+    (twenty = (function(f) {
+        return (function(x) {
+            return f(nineteen(f)(x));
+        });
     }));
     (exports["id"] = id);
     (exports["apply"] = apply);
@@ -214,4 +270,5 @@ define(["require", "exports"], (function(require, exports) {
     (exports["add2"] = add2);
     (exports["mult"] = mult);
     (exports["recursive"] = recursive);
+    (exports["subtract"] = subtract);
 }));

@@ -1,0 +1,51 @@
+http://stackoverflow.com/questions/8790249/lambda-calculus-predecessor-function-reduction-steps
+
+Let's try to answer from a different angle. We have a numeral n with the form:
+
+    f -> x -> f(f(....f(f x))) // f is applied n times
+    
+A predecessor is also a numeral and therefore it will have the form:
+
+    F -> X -> F(F(...(F X)))  // F is applied n-1 times
+
+I am using lower and uppercase letters intentionally, because they can't be the same variables.
+
+The predecessor will certainly depend from its successor n through a transformation function G and a transformation value V
+
+    F -> X -> (f -> x -> f(f(....f(f x)))) G V
+
+    F -> X -> (x -> G(G(...(G x)))) V
+    
+    F -> X -> G(G(...(G V)))
+    
+Now we need to study the nature of G and V.
+
+What we need is that:
+
+    G V = X // first application
+    G (G V) = F X // second application
+    G (G (G V)) = F (F X) // third application
+    // ... and so on
+
+This is achieved  by stating that G is a function applicator and V = _ -> X, a function that returns constantly X, no matter what argument you pass to it, and that from now on we will call const X. The predecessor is now:
+
+We try with the simplest function applicator G = g -> g F. This leads us to:
+
+    (g -> g F)(const X) = const X F = X // good
+    (g -> g F)((g -> g F)(const X)) = (g -> g F)(const X F) = (g -> g F) X = X F // no good
+
+Anyway, applying g to F smells right, but we may need one more level of indirection: G = g -> h -> h(g F), remembering that we will end up with a wrapping function to get rid of.
+
+Adding one function level leads us to:
+
+    G V = (g -> h -> h(g F))(const X) = h -> h(const X F) = h -> h X
+    G (G V) = (g -> h' -> h'(g F))(h -> h X) = h' -> h'((h -> h X) F) = h' -> h'(F X)
+    G (G (G V)) = (g -> h'' -> h''(g F))(h' -> h'(F X)) = h'' -> h''((h' -> h'(F X)) F) = h'' -> h''(F (F X))
+
+At the end we arrive at the topmost level, having applied F (n-1) times. Our predecessor is therefore:
+
+    F -> X -> (h''''''''''' -> h'''''''''''(F(F(...(F X))))  // F is applied n-1 times
+
+Oops, this is not what we want. We need to run the wrapping function and extract the content. This is achieved by applying x -> x, also known as id. The predecessor is therefore:
+
+    F -> X -> (h''''''''''' -> h'''''''''''(F(F(...(F X)))) id = F -> X -> n (g -> h -> h(g F)) (const X) id

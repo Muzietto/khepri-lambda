@@ -16,14 +16,7 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
         one = lambda["one"],
         two = lambda["two"],
         three = lambda["three"],
-        four = lambda["four"],
-        five = lambda["five"],
-        six = lambda["six"],
-        seven = lambda["seven"],
-        eight = lambda["eight"],
-        nine = lambda["nine"],
         ten = lambda["ten"],
-        eleven = lambda["eleven"],
         twelve = lambda["twelve"],
         count = lambda["count"],
         equals = lambda["equals"];
@@ -83,17 +76,10 @@ define(["require", "exports", "./lib/khepri-lambda"], (function(require, exports
     (test3.es33d_true_false = (_false(_true)(not(_true)) === not(and(_true(not(_false))))));
     (test3.es33d_false_true = (_true(_true)(not(_false)) === not(and(_false(not(_true))))));
     (test3.es33d_true_true = (_true(_true)(not(_true)) === not(and(_true(not(_true))))));
-    (test3.es34_2 = (succ(pred)(two) === pred(succ)(two)));
-    (test3.es34_3 = (succ(pred)(three) === pred(succ)(three)));
-    (test3.es34_4 = (succ(pred)(four) === pred(succ)(four)));
-    (test3.es34_5 = (succ(pred)(five) === pred(succ)(five)));
-    (test3.es34_6 = (succ(pred)(six) === pred(succ)(six)));
-    (test3.es34_7 = (succ(pred)(seven) === pred(succ)(seven)));
-    (test3.es34_8 = (succ(pred)(eight) === pred(succ)(eight)));
-    (test3.es34_9 = (succ(pred)(nine) === pred(succ)(nine)));
-    (test3.es34_10 = (succ(pred)(ten) === pred(succ)(ten)));
-    (test3.es34_11 = (succ(pred)(eleven) === pred(succ)(eleven)));
-    (test3.es34_12 = (succ(pred)(twelve) === pred(succ)(twelve)));
-    (test3.es34_12a = (succ(pred)(succ)(pred)(twelve) === pred(succ)(pred)(succ)(twelve)));
+    (test3.es34_1 = (count(succ(pred(one))) === count(pred(succ(one)))));
+    (test3.es34_2 = (count(succ(pred(two))) === count(pred(succ(two)))));
+    (test3.es34_3 = (count(succ(pred(three))) === count(pred(succ(three)))));
+    (test3.es34_12a = (count(succ(pred(succ(pred(twelve))))) === count(pred(succ(pred(succ(twelve)))))));
+    (test3.es34_12b = equals(succ(succ(pred(pred(twelve)))), pred(pred(succ(succ(twelve))))));
     (exports["test3"] = test3);
 }));

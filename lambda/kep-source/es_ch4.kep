@@ -10,7 +10,7 @@ package ( test4 ) with import './lib/khepri-lambda' lambda#{
   zero, one, two, three, four, five, six, seven, eight, nine
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty,
   count, equals
-  add, mult
+  add, mult, subtract
   
 }
 
@@ -19,8 +19,8 @@ in {
   test4 := {};
 
   // free tries
-  //test4.add_one_two_is_three := equals (add one two) three;
-  //test4.mult_one_two_is_two := equals (mult one two) two;
+  test4.add_one_two_is_three := equals (add one two) three;
+  test4.subtract_five_two_is_three := equals (subtract five two) three;
+  test4.mult_two__five_is_ten := equals (mult two five) ten;
   
-  //test4.is_zero_zero_is_true := (is_zero zero === true);
 }

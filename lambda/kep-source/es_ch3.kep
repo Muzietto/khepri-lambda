@@ -87,20 +87,11 @@ in {
   test3.es33d_false_true  := es33di _false _true  === es33dii _false _true;
   test3.es33d_true_true   := es33di _true  _true  === es33dii _true  _true;
   
-  var succ_pred = \n -> succ pred n;
-  var pred_succ = \n -> pred succ n;
-  //test3.es34_1 = succ_pred one === pred_succ one; // minor glitch
-  test3.es34_2 = succ_pred two === pred_succ two;
-  test3.es34_3 = succ_pred three === pred_succ three;
-  test3.es34_4 = succ_pred four === pred_succ four;
-  test3.es34_5 = succ_pred five === pred_succ five;
-  test3.es34_6 = succ_pred six === pred_succ six;
-  test3.es34_7 = succ_pred seven === pred_succ seven;
-  test3.es34_8 = succ_pred eight === pred_succ eight;
-  test3.es34_9 = succ_pred nine === pred_succ nine;
-  test3.es34_10 = succ_pred ten === pred_succ ten;
-  test3.es34_11 = succ_pred eleven === pred_succ eleven;
-  test3.es34_12 = succ_pred twelve === pred_succ twelve;
-  test3.es34_12a = succ pred succ pred twelve === pred succ pred succ twelve;
-  //test3.es34_12b = succ succ pred pred twelve === pred pred succ succ twelve; // why not?
+  var succ_pred = \n -> succ (pred n);
+  var pred_succ = \n -> pred (succ n);
+  test3.es34_1 = count(succ_pred one) === count(pred_succ one); // minor glitch
+  test3.es34_2 = count(succ_pred two) === count(pred_succ two);
+  test3.es34_3 = count(succ_pred three) === count(pred_succ three);
+  test3.es34_12a = count(succ (pred (succ (pred twelve)))) === count(pred (succ (pred (succ twelve))));
+  test3.es34_12b = equals(succ (succ (pred (pred twelve))), pred (pred (succ (succ twelve))));
 }

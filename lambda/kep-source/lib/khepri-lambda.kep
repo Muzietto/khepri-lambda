@@ -11,6 +11,7 @@ package (
   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty
   count, equals
   add, add2, mult, recursive
+  subtract
 )
 {
   // ch 2
@@ -30,39 +31,36 @@ package (
   not := \x -> x _false _true;
   and := \x -> \y -> x y _false;
   or := \x -> \y -> x _true y;
-  
-  succ := \n -> pair _false n; // \w -> w _false n;
-  //pred := \n -> n second; // NB: pred zero fails!!!
-  //pred := \n -> (((is_zero n) zero) (n second)) ;
-  pred := \n -> (((cond zero) (n second)) (is_zero n));
-  zero := id;
-  is_zero := \n -> n first; // REM first === _true
+
+  //succ := \n -> pair _false n; // \w -> w _false n;
+  ////pred := \n -> n second; // NB: pred zero fails!!!
+  ////pred := \n -> (((is_zero n) zero) (n second)) ;
+  //pred := \n -> (((cond zero) (n second)) (is_zero n));
+  //zero := id;
+  //is_zero := \n -> n first; // REM first === _true
 
   // CHURCH NUMERALS
-  //first3 := \x -> \y -> \z -> x;
-  //second3 := \x -> \y -> \z -> y;
-  //third3 := \x -> \y -> \z -> z;
-  //
-  //zero := \f -> \x -> x; // second
-  //one  := \f -> \x -> f x;
-  //two  := \f -> \x -> f (f x);
-  //three:= \f -> \x -> f (f (f x));
-  //
-  //succ := \n -> \f -> \x -> f ((n f) x);
-  //is_zero := \n -> n second === 
-  //
-  count := \n -> ? (is_zero n === _true) : 0 : 1 + count(pred n);
+  zero := \f -> \x -> x; // second
+  succ := \n -> \f -> \x -> f (n f x);
+  is_zero := \n -> n (constant _false) _true;
+  pred := \n -> \F -> \X -> n (\g -> \h -> h(g F)) (constant X) id;
+
+  add := \m -> \n -> \f -> \x -> ((m f) (n f x));
+  subtract := \m -> \n -> (n pred) m;
+  mult := \m -> \n -> \f -> \x -> ((m (n f)) x);
+
+  //count := \n -> ? (is_zero n === _true) : 0 : 1 + count(pred n);
+  count := \n -> n (\x -> x + 1) 0;
   equals := \a -> \b -> count(a) === count(b);
 
   // ch 4
   //add := \x -> \y -> (((is_zero y) x) (add (succ x) (pred y)));
-  add2 := \f -> \x -> \y -> (((is_zero y) x) ((((f f) (succ x)) (pred y))));
-  add = add2 add2;
-  
-  mult := \x -> \y -> (((is_zero y) zero) (add x (mult x (pred y))));
+  //add2 := \f -> \x -> \y -> (((is_zero y) x) ((((f f) (succ x)) (pred y))));
+  //add = add2 add2;
 
-//  recursive := \f -> (\s 
-  
+  //mult := \x -> \y -> (((is_zero y) zero) (add x (mult x (pred y))));
+  //recursive := \f -> (\s 
+
   // additional stuff  
   one := succ zero;
   two := succ one;
@@ -84,5 +82,5 @@ package (
   eighteen := succ seventeen;
   nineteen := succ eighteen;
   twenty := succ nineteen;
-  
+
 }

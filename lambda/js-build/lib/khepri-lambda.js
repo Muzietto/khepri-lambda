@@ -124,6 +124,12 @@ define(["require", "exports"], (function(require, exports) {
             }))(0));
         });
     }));
+    (recursive = (function(f) {
+        var s = (function(s0) {
+            return f(s0(s0));
+        });
+        return f(f(s(s)));
+    }));
     (one = (function(f) {
         return (function(x) {
             return f(x);

@@ -58,13 +58,16 @@ package (
   //add2 := \f -> \x -> \y -> (((is_zero y) x) ((((f f) (succ x)) (pred y))));
   //add = add2 add2;
 
-  //mult := \x -> \y -> (((is_zero y) zero) (add x (mult x (pred y))));
-  //recursive := \f -> (\s 
-
+  //mult := \x -> \y -> (is_zero y) zero (add x (mult x (pred y)));
+  recursive := \f -> (\s -> f (s s)) (\s -> f (s s));
+  
+  var mult1 := \f -> \x -> \y -> (is_zero y) 0 ((add x) ((f x) (pred y)));
+  //mult = recursive mult1;
+ 
   // additional stuff  
   one := succ zero;
   two := succ one;
-  three := succ two;
+  three := succ two; 
   four := succ three;
   five := succ four;
   six := succ five;

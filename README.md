@@ -1,5 +1,5 @@
 # khepri-lambda
-Lambda calculus in Khepri (khepri-lang.org)
+Lambda calculus in Khepri (khepri-lang.com)
 
 Download, doubleclick on index.html and you're on your way...
 
